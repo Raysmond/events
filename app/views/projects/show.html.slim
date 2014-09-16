@@ -1,0 +1,21 @@
+- content_for :page_heading
+	h1 = @project.name
+
+div
+	span 团队： 
+	= link_to @project.team.name, team_path(@project.team)
+
+.mt10
+	strong 任务清单
+	ul.mt10
+		- @project.todos.each do |todo|
+			li = link_to todo.title, todo_path(todo)
+	
+hr
+.mt10
+	strong 添加任务
+	.row
+		.col-sm-4
+			- @todo = Todo.new
+			= render "/todos/form"
+

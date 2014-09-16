@@ -1,0 +1,9 @@
+- content_for :page_heading
+	h1 = @team.name
+
+p
+	strong 项目列表
+
+ul
+	- @team.projects.each do |pj|
+		li = link_to pj.name, project_path(pj)

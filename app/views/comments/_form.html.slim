@@ -1,0 +1,12 @@
+= simple_form_for(@comment) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :parent_id
+    = f.input :todo_id
+    = f.input :user_id
+    = f.input :content
+    = f.input :deleted
+
+  .form-actions
+    = f.button :submit

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+html.theme-light lang="en"
+  head
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    title 
+      | Events
+    = stylesheet_link_tag  "application", media: "all"
+    = javascript_include_tag "application"
+    / = include_gon
+    = csrf_meta_tags
+
+body
+
+.container.main-container
+  .row#main
+    .row
+      = render 'layouts/header'
+    .row
+      .col-12-sm
+        - if content_for?(:page_heading)
+          .page-header
+            = yield :page_heading
+        - if notice
+          .alert.alert-info#notice
+            = notice
+    .row
+      .col-sm-12.main-content
+        = yield

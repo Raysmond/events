@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong 标题：
+  = @todo.title
+p
+  strong 创建者：
+  = link_to @todo.creator.name, user_path(@todo.creator)
+p
+  strong 指派给：
+  = link_to @todo.assign_user.name, user_path(@todo.assign_user)
+p
+  strong 截止日期：
+  = @todo.deadline
+
+= link_to '编辑', edit_todo_path(@todo)
+|  |  
+= link_to '返回', @todo.project

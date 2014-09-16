@@ -1,0 +1,21 @@
+p#notice = notice
+
+p
+  strong Parent:
+  = @comment.parent_id
+p
+  strong Todo:
+  = @comment.todo_id
+p
+  strong User:
+  = @comment.user_id
+p
+  strong Content:
+  = @comment.content
+p
+  strong Deleted:
+  = @comment.deleted
+
+= link_to 'Edit', edit_comment_path(@comment)
+'|
+= link_to 'Back', comments_path

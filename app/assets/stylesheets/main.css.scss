@@ -1,0 +1,51 @@
+html{
+	font-size: 100%;
+}
+body{
+	font-size: 100%;
+	font-family: "Helvetica Neue", Helvetica, Arial, Microsoft Yahei, Hiragino Sans GB, Microsoft Sans Serif, WenQuanYi Micro Hei, sans-serif;
+	line-height: 1.8;
+}
+p, ol, ul, td{
+	font-size: 100%;
+}
+
+.container{
+	max-width: 960px;
+}
+.main-container{
+	padding-top: 70px;
+}
+
+.checkbox input.boolean{
+	width: auto;
+	margin-left: 15px;
+	margin-top: 5px;
+	height: auto;
+}
+
+.form-actions{
+	margin-top: 20px;
+}
+
+.form-inputs .input{
+	margin-bottom: 10px;
+}
+a:hover{
+	background: none;
+}
+a:visited{
+	color: #428bca;
+}
+
+.main-content li{
+	margin-bottom: 10px;
+}
+
+.mt10{margin-top: 10px;}
+.mt20{margin-top: 20px;}
+.mt30{margin-top: 30px;}
+.mr10{margin-right: 10px;}
+.mr20{margin-right: 20px;}
+.ml10{margin-left: 10px;}
+.ml20{margin-left: 20px;}

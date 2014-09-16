@@ -1,0 +1,29 @@
+<div class="navbar navbar-default  navbar-fixed-top typo-small" role="navigation">
+  <div class="container container-narrow">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      a.navbar-brand#logo href=root_path 
+        span Tower Events
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        - if current_user
+          li.dropdown
+            a.dropdown-toggle href="#" data-toggle="dropdown"
+              = current_user.name
+              span.caret
+            ul.dropdown-menu role="menu"
+              / <li class="divider</li>
+              li = link_to "登出", destroy_user_session_path, method: :delete
+        - else
+          li = link_to "登录", new_user_session_path
+          li = link_to "注册", new_user_registration_path
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>

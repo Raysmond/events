@@ -1,0 +1,6 @@
+- if current_user
+	h1 参与的团队
+	hr
+	ul
+		- current_user.teams.each do |team|
+			li = link_to team.name, team_path(team)
