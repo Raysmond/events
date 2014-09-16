@@ -26,10 +26,12 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
+    @comment.user = current_user
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        event_todo_add_comment(@comment, @comment.todo)
+        format.html { redirect_to @comment.todo, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -71,5 +73,15 @@ class CommentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
       params.require(:comment).permit(:parent_id, :todo_id, :user_id, :content, :deleted)
+    end
+
+    # 添加任务回复事件
+    def event_todo_add_comment(comment, todo)
+      todo.events.create(
+        user: current_user,
+        title: "回复了任务：#{view_context.link_to todo.title, todo_path(todo)}",
+        owner: "#{view_context.link_to todo.project.name, project_path(todo.project)}",
+        content: "#{view_context.link_to comment.content, comment_path(comment)}",
+        action: :todo_add_comment)
     end
 end

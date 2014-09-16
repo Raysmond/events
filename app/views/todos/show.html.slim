@@ -1,18 +1,40 @@
-p#notice = notice
+- content_for :page_heading
+	h1 = @todo.title
 
 p
-  strong 标题：
-  = @todo.title
-p
+  strong 状态：
+  - if @todo.status == 'deleted'
+    span.label.label-danger 已删除
+  - else
+  	span.label.label-warning = t @todo.status, scope: 'todo'
+  
+  span.ml10
   strong 创建者：
   = link_to @todo.creator.name, user_path(@todo.creator)
-p
+
+  span.ml10
   strong 指派给：
   = link_to @todo.assign_user.name, user_path(@todo.assign_user)
-p
+
+  span.ml10
   strong 截止日期：
   = @todo.deadline
 
 = link_to '编辑', edit_todo_path(@todo)
 |  |  
-= link_to '返回', @todo.project
+= link_to '<< 返回项目', @todo.project
+
+hr 
+
+- unless @todo.comments.empty?
+	- @todo.comments.each do |c|
+		= link_to c.user.name, user_path(c.user)
+		br
+		= c.content
+		hr
+
+h2 添加评论
+
+- @comment = Comment.new
+- @comment.todo_id = @todo.id
+= render "/comments/form"

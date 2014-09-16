@@ -11,6 +11,10 @@
         span Tower Events
     </div>
     <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-left">
+        - if current_user
+          li = link_to "动态", events_path 
+      </ul>
       <ul class="nav navbar-nav navbar-right">
         - if current_user
           li.dropdown

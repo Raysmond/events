@@ -18,6 +18,29 @@ RailsAdmin.config do |config|
 
   config.total_columns_width = 910
 
+  config.model 'Event' do 
+    configure :title do
+      pretty_value do 
+        event = bindings[:object]
+        %{#{event.title}}.html_safe
+      end
+    end
+
+    configure :owner do
+      pretty_value do 
+        event = bindings[:object]
+        %{#{event.owner}}.html_safe
+      end
+    end
+
+    configure :content do
+      pretty_value do 
+        event = bindings[:object]
+        %{#{event.content}}.html_safe
+      end
+    end
+  end
+
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory

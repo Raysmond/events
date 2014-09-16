@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  action: 1
+  eventable_id: 1
+  eventable_type: MyString
+  title: MyString
+  content: MyText
+  owner: MyString
+
+two:
+  user_id: 1
+  action: 1
+  eventable_id: 1
+  eventable_type: MyString
+  title: MyString
+  content: MyText
+  owner: MyString

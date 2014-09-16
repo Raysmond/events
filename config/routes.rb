@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   resources :comments
 
-  resources :todos
+  resources :todos do 
+    member do 
+      put 'complete'
+    end
+  end
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
@@ -9,6 +13,8 @@ Rails.application.routes.draw do
   resources :projects
 
   resources :teams
+
+  get 'events' => 'events#index', as: :events
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

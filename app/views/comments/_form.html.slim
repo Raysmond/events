@@ -1,12 +1,9 @@
 = simple_form_for(@comment) do |f|
-  = f.error_notification
+	= f.error_notification
+	.form-inputs
+		- if @comment.todo_id.present?
+			= f.hidden_field :todo_id, :value => @comment.todo_id
+		= f.input :content
 
-  .form-inputs
-    = f.input :parent_id
-    = f.input :todo_id
-    = f.input :user_id
-    = f.input :content
-    = f.input :deleted
-
-  .form-actions
-    = f.button :submit
+	.form-actions
+		= f.button :submit, value: "添加评论", class: "btn btn-success"

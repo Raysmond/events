@@ -8,8 +8,19 @@ div
 .mt10
 	strong 任务清单
 	ul.mt10
-		- @project.todos.each do |todo|
-			li = link_to todo.title, todo_path(todo)
+		- todos = Todo.where(project_id: @project.id).with_status(:in_progress)
+		- todos.each do |todo|
+			li 
+				= link_to todo.title, todo_path(todo)
+				- if todo.assign_user_id
+					span.ml10
+						= "（#{todo.assign_user.name}）"
+				span.ml10
+					= link_to "编辑", edit_todo_path(todo), class: "btn btn-xs btn-primary"
+				span.ml10
+					= link_to "完成", complete_todo_path(todo), class: "btn btn-xs btn-success", method: :put, data: {confirm: "确定完成了任务么？"}
+				span.ml10
+					= link_to "删除", todo_path(todo), class: "btn btn-xs btn-danger", method: :delete, data: {confirm: "确定删除任务？"}
 	
 hr
 .mt10

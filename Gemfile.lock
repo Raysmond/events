@@ -204,6 +204,7 @@ DEPENDENCIES
   enumerize
   jbuilder (~> 2.0)
   jquery-rails
+  kaminari
   mysql2
   pry
   pry-nav

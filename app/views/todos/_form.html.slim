@@ -3,10 +3,10 @@
 	.form-inputs
 		= f.input :title
 		= f.input :assign_user do
-			= f.collection_select :assign_user_id, User.all, :id, :name, {}, {class: "form-control"}
-		- unless @project
-			= f.input :project do
-				= f.collection_select :project_id, Project.all, :id, :name, {}, {class: "form-control"}
+			= f.collection_select :assign_user_id, User.all, :id, :name, {prompt:true}, {class: "form-control"}
+		/ - if !@project or !@todo.project_id.present?
+		/ 	= f.input :project do
+		/ 		= f.collection_select :project_id, Project.all, :id, :name, {}, {class: "form-control"}
 		- if @project
 			= f.hidden_field :project_id, :value => @project.id
 		= f.input :deadline

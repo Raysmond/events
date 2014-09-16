@@ -1,0 +1,15 @@
+.row.event-item.event
+	.col-sm-1
+		= event.created_at.strftime("%H:%M")
+
+	.col-sm-2
+		strong = link_to event.user.name, user_path(event.user)
+	
+	.col-sm-7
+		= simple_format event.title
+		- if event.content.present?
+			= simple_format event.content
+	.col-sm-2
+		strong = simple_format event.owner
+	.col-sm-12
+		hr

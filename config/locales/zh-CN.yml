@@ -1,4 +1,17 @@
 zh-CN:
+  todo:
+    in_progress: 进行中
+    completed: 已完成
+    deleted: 已删除
+  event:
+    todo_create: 创建任务
+    todo_delete: 删除任务
+    todo_complete: 完成任务
+    todo_assign_to_user: 给任务指派完成者
+    todo_update_assigned_user: 修改任务完成者
+    todo_update_deadline: 修改任务完成时间
+    todo_add_comment: 评论任务
+    todo_update: 修改任务
   activerecord:
     models:
       user: 用户
@@ -7,6 +20,7 @@ zh-CN:
       todo: 任务
       access: 访问权限
       comment: 评论
+      event: 事件
     attributes:
       user:
         email: 邮箱

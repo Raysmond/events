@@ -34,6 +34,7 @@ gem 'devise',       '3.2.4'
 gem 'bootstrap-sass'
 gem 'rails_admin'
 gem 'enumerize'
+gem 'kaminari'
 
 group :development do
   gem "better_errors"

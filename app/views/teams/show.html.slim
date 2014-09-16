@@ -1,5 +1,7 @@
 - content_for :page_heading
-	h1 = @team.name
+	h1
+		| 当前团队： 
+		= @team.name
 
 p
 	strong 项目列表
