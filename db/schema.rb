@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140916135132) do
+ActiveRecord::Schema.define(version: 20140917144324) do
 
   create_table "comments", force: true do |t|
     t.integer  "parent_id"
@@ -28,11 +28,11 @@ ActiveRecord::Schema.define(version: 20140916135132) do
     t.integer  "action"
     t.integer  "eventable_id"
     t.string   "eventable_type"
-    t.string   "title"
-    t.text     "content"
-    t.string   "owner"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "params"
+    t.integer  "ownerable_id"
+    t.string   "ownerable_type"
   end
 
   create_table "projects", force: true do |t|

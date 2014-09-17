@@ -1,5 +1,5 @@
 - content_for :page_heading
-	h1 事件动态
+	h1 动态
 
 div#events
 	.page
@@ -8,6 +8,7 @@ div#events
 = paginate @events
 
 javascript:
+	// reference: https://github.com/paulirish/infinite-scroll
 	$(function(){
 		$('#events').infinitescroll({
 	    navSelector  : "nav.pagination",   // selector for the paged navigation (it will be hidden)

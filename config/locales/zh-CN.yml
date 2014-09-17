@@ -12,6 +12,24 @@ zh-CN:
     todo_update_deadline: 修改任务完成时间
     todo_add_comment: 评论任务
     todo_update: 修改任务
+    todo:
+      create: 
+        title: 创建了任务
+      update:
+        title: "将任务 \"%{old_todo_title}\" 修改为"
+      delete:
+        title: 删除了任务
+      complete:
+        title: 完成了任务
+      assign_to_user:
+        title: "给 %{user_name} 指派了任务"
+      update_assigned_user:
+        title: "把 %{old_user_name} 的任务指派给 %{new_user_name}"
+      update_deadline:
+        title: "将任务完成时间从 %{old_deadline} 修改为 %{new_deadline}"
+        no_deadline: 没有截止日期
+      add_comment:
+        title: 回复了任务
   activerecord:
     models:
       user: 用户

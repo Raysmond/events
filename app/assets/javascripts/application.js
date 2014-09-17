@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require bootstrap-datepicker/js/bootstrap-datepicker
+//= require bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN
 //= require turbolinks
 //= require jquery.infinitescroll.min
 //= require_tree .

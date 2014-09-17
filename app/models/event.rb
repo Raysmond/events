@@ -1,7 +1,9 @@
 class Event < ActiveRecord::Base
 	extend Enumerize
+	serialize :params
 
-	belongs_to :eventable, polymorphic: true
+	belongs_to :eventable, polymorphic: true 
+	belongs_to :ownerable, polymorphic: true # 项目or日历
 	belongs_to :user
 
 	# 事件动作 or 类型
@@ -18,5 +20,9 @@ class Event < ActiveRecord::Base
 		todo_update: 								7 	# 修改任务
 
     }, scope: :with_action, i18n_scope: "event"
+
+  def params
+    self[:params] ||= { }
+  end
 
 end

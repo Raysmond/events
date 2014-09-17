@@ -14,11 +14,12 @@ p
 
   span.ml10
   strong 指派给：
-  = link_to @todo.assign_user.name, user_path(@todo.assign_user)
+  = link_to @todo.assign_user.name, user_path(@todo.assign_user) if @todo.assign_user.present?
+  = "无" unless @todo.assign_user.present?
 
   span.ml10
   strong 截止日期：
-  = @todo.deadline
+  = @todo.deadline.present? ? @todo.deadline : "无"
 
 = link_to '编辑', edit_todo_path(@todo)
 |  |  

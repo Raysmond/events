@@ -1,15 +1,23 @@
 = simple_form_for(@todo) do |f|
 	= f.error_notification
 	.form-inputs
-		= f.input :title
-		= f.input :assign_user do
-			= f.collection_select :assign_user_id, User.all, :id, :name, {prompt:true}, {class: "form-control"}
+		= f.input :title, placeholder: "任务内容", required: true
+		= f.input :assign_user, required: true do
+			= f.collection_select :assign_user_id, User.all, :id, :name, {prompt: "请选择"}, {class: "form-control"}
 		/ - if !@project or !@todo.project_id.present?
 		/ 	= f.input :project do
 		/ 		= f.collection_select :project_id, Project.all, :id, :name, {}, {class: "form-control"}
 		- if @project
 			= f.hidden_field :project_id, :value => @project.id
-		= f.input :deadline
+		= f.input :deadline, as: :string, input_html: {class: "datepicker", "data-date-format" => "yyyy-mm-dd", value: (@todo.deadline.present? ? @todo.deadline.strftime("%Y-%m-%d") : "")}
 		
 	.form-actions
-		= f.button :submit
+		= f.button :submit, value: "保存", class: "btn btn-success"
+
+javascript:
+	$(function(){
+		$('.datepicker').datepicker({
+			format: 'yyyy-mm-dd',
+			language: 'zh-CN'
+		});
+	});
