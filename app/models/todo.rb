@@ -9,12 +9,12 @@ class Todo < ActiveRecord::Base
 	has_many   :comments
 
 	# 没有被删除的任务
-	scope :active, -> { where("status != ?", 2) }
+	scope :active, -> { where("status <> ?", 2) }
 
 	enumerize :status, in: {
-		in_progress: 0, 
-		completed: 1,
-		deleted: 2
-    }, default: :in_progress, scope: :with_status, i18n_scope: "todo"
+		in_progress:  0, 
+		completed:    1,
+		deleted:      2
+		}, default: :in_progress, scope: :with_status, i18n_scope: "todo"
 
 end
