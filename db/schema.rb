@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917144324) do
+ActiveRecord::Schema.define(version: 20140918175059) do
+
+  create_table "accesses", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "user_id"
+    t.integer  "privilege"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: true do |t|
     t.integer  "parent_id"
@@ -33,6 +41,7 @@ ActiveRecord::Schema.define(version: 20140917144324) do
     t.text     "params"
     t.integer  "ownerable_id"
     t.string   "ownerable_type"
+    t.integer  "team_id"
   end
 
   create_table "projects", force: true do |t|

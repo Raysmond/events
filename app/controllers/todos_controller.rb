@@ -1,6 +1,7 @@
 class TodosController < ApplicationController
   before_action :set_todo, only: [:show, :edit, :update, :destroy, :complete]
-
+  before_action :authenticate_user!
+  
   # GET /todos
   # GET /todos.json
   def index
@@ -60,16 +61,21 @@ class TodosController < ApplicationController
       if todo_params[:assign_user_id].present? and not todo_params[:assign_user_id].empty?
         @todo.assign_by_user = current_user
       end
+
       old_title = @todo.title
       old_user = @todo.assign_user
       old_deadline = @todo.deadline
+      if todo_params[:assign_user_id].present? and todo_params[:assign_user_id].empty?
+        @todo.assign_user_id = nil
+        @todo.assign_user = nil
+      end
       if @todo.update(todo_params)
         # 修改任务
         TodoEvent.create_todo_update(current_user, old_title, @todo) if @todo.title != old_title
         # 指派任务
         TodoEvent.create_todo_assign_to_user(current_user, @todo.assign_user, @todo) if !old_user.present? and @todo.assign_user.present?
         # 修改任务完成者
-        TodoEvent.create_todo_update_assigned_user(current_user, old_user, @todo.assign_user, @todo) if old_user.present? and old_user.id != @todo.assign_user.id
+        TodoEvent.create_todo_update_assigned_user(current_user, old_user, @todo.assign_user, @todo) if old_user.present? and old_user != @todo.assign_user
         # 修改任务完成时间
         TodoEvent.create_todo_update_deadline(current_user, old_deadline, @todo) if old_deadline != @todo.deadline
 

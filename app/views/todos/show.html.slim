@@ -10,7 +10,7 @@ p
   
   span.ml10
   strong 创建者：
-  = link_to @todo.creator.name, user_path(@todo.creator)
+  = @todo.creator.present? ? link_to(@todo.creator.name, user_path(@todo.creator) ) : "无"
 
   span.ml10
   strong 指派给：

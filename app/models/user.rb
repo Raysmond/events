@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   belongs_to :current_team, class_name: 'Team'
   has_and_belongs_to_many :teams
+  has_many :projects, :through => :accesses
+  has_many :accesses
   has_many :created_teams, class_name: 'Team', foreign_key: 'creator_id'
   has_many :created_todos, class_name: 'Todo', foreign_key: 'creator_id' 
   has_many :assigned_todos, class_name: 'Todo', foreign_key: 'assign_user_id' 

@@ -8,6 +8,7 @@ class TodoEvent < Event
     return nil unless self.require(current_user, comment)
     todo = comment.todo
     todo.events.create(
+      team: current_user.current_team,
       ownerable: todo.project,
       user: current_user,
       params: { todo_title: todo.title, comment_id: comment.id, comment_content: comment.content, project_name: todo.project.name },
@@ -18,6 +19,7 @@ class TodoEvent < Event
   def self.create_todo_create(current_user, todo)
     return nil unless self.require(current_user, todo)
     todo.events.create(
+      team: current_user.current_team,
       user: current_user,
       ownerable: todo.project,
       params: {todo_title: todo.title, project_name: todo.project.name},
@@ -28,6 +30,7 @@ class TodoEvent < Event
   def self.create_todo_complete(current_user, todo)
     return nil unless self.require(current_user, todo)
     todo.events.create(
+      team: current_user.current_team,
       user: current_user,
       ownerable: todo.project,
       params: {todo_title: todo.title, project_name: todo.project.name},
@@ -38,6 +41,7 @@ class TodoEvent < Event
   def self.create_todo_update(current_user, old_title, todo)
     return nil unless self.require(current_user, todo)
     todo.events.create(
+      team: current_user.current_team,
       user: current_user,
       ownerable: todo.project,
       params: {old_todo_title: old_title, todo_title: todo.title, project_name: todo.project.name},
@@ -48,6 +52,7 @@ class TodoEvent < Event
   def self.create_todo_delete(current_user, todo)
     return nil unless self.require(current_user, todo)
     todo.events.create(
+      team: current_user.current_team,
       user: current_user,
       ownerable: todo.project,
       params: {todo_title: todo.title, project_name: todo.project.name},
@@ -58,6 +63,7 @@ class TodoEvent < Event
   def self.create_todo_assign_to_user(current_user, user, todo)
     return nil unless self.require(current_user, todo)
     todo.events.create(
+      team: current_user.current_team,
       user: current_user,
       ownerable: todo.project,
       params: {todo_title: todo.title, user_name: user.present? ? user.name : nil, project_name: todo.project.name},
@@ -68,6 +74,7 @@ class TodoEvent < Event
   def self.create_todo_update_assigned_user(current_user, old_user, new_user, todo)
     return nil unless self.require(current_user, todo, old_user)
     todo.events.create(
+      team: current_user.current_team,
       user: current_user,
       ownerable: todo.project,
       params: {todo_title: todo.title, old_user_name: old_user.name, new_user_name: new_user.present? ? new_user.name : nil , project_name: todo.project.name},
@@ -78,6 +85,7 @@ class TodoEvent < Event
   def self.create_todo_update_deadline(current_user, old_date, todo)
     return nil unless self.require(current_user, todo)
     todo.events.create(
+      team: current_user.current_team,
       user: current_user,
       ownerable: todo.project,
       params: {todo_title: todo.title, old_deadline: old_date, new_deadline: todo.deadline, project_name: todo.project.name},
