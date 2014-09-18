@@ -5,6 +5,7 @@ class TodoEvent < Event
 
 	# 添加任务回复事件
   def self.create_todo_add_comment(current_user, comment)
+    return nil unless self.require(current_user, comment)
     todo = comment.todo
     todo.events.create(
       ownerable: todo.project,
@@ -15,6 +16,7 @@ class TodoEvent < Event
 
   # 创建任务事件
   def self.create_todo_create(current_user, todo)
+    return nil unless self.require(current_user, todo)
     todo.events.create(
       user: current_user,
       ownerable: todo.project,
@@ -24,6 +26,7 @@ class TodoEvent < Event
 
   # 完成了任务
   def self.create_todo_complete(current_user, todo)
+    return nil unless self.require(current_user, todo)
     todo.events.create(
       user: current_user,
       ownerable: todo.project,
@@ -33,6 +36,7 @@ class TodoEvent < Event
 
   # 修改任务
   def self.create_todo_update(current_user, old_title, todo)
+    return nil unless self.require(current_user, todo)
     todo.events.create(
       user: current_user,
       ownerable: todo.project,
@@ -42,6 +46,7 @@ class TodoEvent < Event
 
   # 删除任务
   def self.create_todo_delete(current_user, todo)
+    return nil unless self.require(current_user, todo)
     todo.events.create(
       user: current_user,
       ownerable: todo.project,
@@ -51,24 +56,27 @@ class TodoEvent < Event
 
   # 指派任务
   def self.create_todo_assign_to_user(current_user, user, todo)
+    return nil unless self.require(current_user, todo)
     todo.events.create(
       user: current_user,
       ownerable: todo.project,
-      params: {todo_title: todo.title, user_name: user.name, project_name: todo.project.name},
+      params: {todo_title: todo.title, user_name: user.present? ? user.name : nil, project_name: todo.project.name},
       action: :todo_assign_to_user)
   end
 
   # 修改任务完成者
   def self.create_todo_update_assigned_user(current_user, old_user, new_user, todo)
+    return nil unless self.require(current_user, todo, old_user)
     todo.events.create(
       user: current_user,
       ownerable: todo.project,
-      params: {todo_title: todo.title, old_user_name: old_user.name, new_user_name: new_user.name , project_name: todo.project.name},
+      params: {todo_title: todo.title, old_user_name: old_user.name, new_user_name: new_user.present? ? new_user.name : nil , project_name: todo.project.name},
       action: :todo_update_assigned_user)
   end
 
   # 修改任务完成时间
   def self.create_todo_update_deadline(current_user, old_date, todo)
+    return nil unless self.require(current_user, todo)
     todo.events.create(
       user: current_user,
       ownerable: todo.project,

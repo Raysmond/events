@@ -46,7 +46,7 @@ group :development, :test do
   gem 'binding_of_caller'
   gem 'awesome_print'
   gem 'rspec-rails', '~> 3.0.1'
-  gem 'rspec-cells', '~> 0.2.1'
+  # gem 'rspec-cells', '~> 0.2.1'
   gem 'factory_girl_rails', '1.4.0'
   # gem 'rack-mini-profiler'
 end

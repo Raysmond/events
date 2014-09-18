@@ -26,4 +26,11 @@ class Event < ActiveRecord::Base
 	  self[:params] ||= { }
 	end
 
+	def self.require(*field)
+    field.each do |f|
+      return false unless f.present?
+    end
+    true
+  end
+
 end
