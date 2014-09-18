@@ -8,6 +8,7 @@
 3. Initialize database
 
 	  ```bash
+	  bundle
 	  rake db:create
 	  rake db:migrate
 	  rake db:seed
@@ -22,9 +23,18 @@
 	```
 	rails s
 	```
+	Try the following actions:
+	- Create some todos
+	- Complete a todo item
+	- Delete a todo item
+	- Assign a user to a todo item
+	- Reassign a user to a todo item
+	- Update todo deadline
+	- Add some comments to a todo item
+	- Go to the `/events` page and see the events stream
    
 5. Run tests
 
 	```bash
-	bundle exec rspec
+	rspec
 	```

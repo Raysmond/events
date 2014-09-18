@@ -5,6 +5,6 @@ FactoryGirl.define do
     password 'password'
     password_confirmation 'password'
     created_at 100.days.ago
-    current_team Team.create!(name: "team")
+    association :current_team, factory: :team
   end
 end
