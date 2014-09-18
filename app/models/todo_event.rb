@@ -1,12 +1,11 @@
 class TodoEvent < Event
-
-	def todo
-		self.eventable
-	end
+  def todo
+    self.eventable
+  end
 
 	# 添加任务回复事件
   def self.create_todo_add_comment(current_user, comment)
-  	todo = comment.todo
+    todo = comment.todo
     todo.events.create(
       ownerable: todo.project,
       user: current_user,
