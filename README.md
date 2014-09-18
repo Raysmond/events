@@ -14,12 +14,15 @@
 	  ```
 
 4. Sign in and see how it works
-   user a: `a@a.com:111`
-   user b: `b@b.com:111`
-   user c: `c@c.com:111`
-   ```
-   rails s
-   ```
+	
+	user a: `a@a.com:111`
+	user b: `b@b.com:111`
+	user c: `c@c.com:111`	
+	
+	```
+	rails s
+	```
+   
 5. Run tests
 
 	```bash
