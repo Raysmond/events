@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe TodoEvent, :type => :model do
-	let(:todo) { FactoryGirl.create(:todo) }
+  let(:todo) { FactoryGirl.create(:todo) }
   let(:user) { FactoryGirl.create(:user) }
   let(:user1) { FactoryGirl.create(:user) }
   let(:team) { FactoryGirl.create(:team) }
@@ -106,6 +106,18 @@ describe TodoEvent, :type => :model do
   	expect(e.params[:project_name]).to eq("project")
   	expect(e.params[:old_deadline]).to eq(old_date)
   	expect(e.params[:new_deadline]).to eq(todo.deadline)
+
+  	old_date = todo.deadline
+  	todo.deadline = nil
+  	e = TodoEvent.create_todo_update_deadline(user, old_date, todo)
+  	expect(e).not_to eq(nil)
+  	expect(e.action).to eq('todo_update_deadline')
+  	expect(e.params.empty?).to eq(false)
+  	expect(e.params[:todo_title]).to eq("title")
+  	expect(e.params[:project_name]).to eq("project")
+  	expect(e.params[:old_deadline]).to eq(old_date)
+  	expect(e.params[:new_deadline]).to eq(nil)
+
   end
 
   it "should save todo_add_comment event correctly" do 
