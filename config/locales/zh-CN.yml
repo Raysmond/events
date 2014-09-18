@@ -75,6 +75,20 @@ zh-CN:
             current_password:
               invalid: 当前密码错误
               blank: 请输入当前密码
+        event:
+          attributes:
+            user_id: 
+              blank: 触发事件的用户不能为空
+            action:
+              blank: 事件类型不能为空
+            eventable_id:
+              blank: 事件资源id不能为空
+            eventable_type:
+              blank: 事件资源类型不能为空
+            ownerable_id:
+              blank: 事件来源id不能为空
+            ownerable_type:
+              blank: 事件来源类型不能为空
 
 
 

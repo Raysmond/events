@@ -6,6 +6,8 @@ class Event < ActiveRecord::Base
 	belongs_to :ownerable, polymorphic: true # 项目or日历
 	belongs_to :user
 
+	validates_presence_of :user_id, :action, :eventable_id, :eventable_type, :ownerable_id, :ownerable_type
+
 	# 事件动作 or 类型
 	enumerize :action, in: {
 		todo_create:                0,  # 创建任务
@@ -15,10 +17,9 @@ class Event < ActiveRecord::Base
 		todo_update_assigned_user:  4,  # 修改任务完成者
 		todo_update_deadline:       5,  # 修改任务完成时间
 		todo_add_comment:           6,  # 评论任务
-
-		# 应该还有
 		todo_update:                7   # 修改任务
-
+		
+		# 其他任务，如新建文档之类的
 		}, scope: :with_action, i18n_scope: "event"
 
 	def params

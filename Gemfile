@@ -36,7 +36,7 @@ gem 'rails_admin'
 gem 'enumerize'
 gem 'kaminari'
 
-group :development do
+group :development, :test do
   gem "better_errors"
   gem 'pry'
   gem 'pry-remote'
@@ -45,6 +45,9 @@ group :development do
   gem 'quiet_assets'
   gem 'binding_of_caller'
   gem 'awesome_print'
+  gem 'rspec-rails', '~> 3.0.1'
+  gem 'rspec-cells', '~> 0.2.1'
+  gem 'factory_girl_rails', '1.4.0'
   # gem 'rack-mini-profiler'
 end
 
