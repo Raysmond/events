@@ -6,18 +6,17 @@ div#events
 		= render @events
 
 = paginate @events
-div#last_event style="display:none;"
-	= @events.last.id
 
 javascript:
+	// 更新日期的显示
 	function update_date(newElements){
 		var last_date;
-  	var today = new Date();
-  	var yesterday = new Date();
-  	yesterday.setDate(yesterday.getDate() - 1);
-  	today = " " + (today.getMonth() + 1) + "/" + today.getDate();
-  	yesterday = " " + (yesterday.getMonth() + 1) + "/" + yesterday.getDate();
-  	if(window.last_date != undefined){
+		var today = new Date();
+		var yesterday = new Date();
+		yesterday.setDate(yesterday.getDate() - 1);
+		today = " " + (today.getMonth() + 1) + "/" + today.getDate();
+		yesterday = " " + (yesterday.getMonth() + 1) + "/" + yesterday.getDate();
+		if(window.last_date != undefined){
 			last_date = window.last_date;
 		} else{
 			last_date = $('#events .event .event-date').last().text();
@@ -42,14 +41,17 @@ javascript:
 			}
 		}
 	}
-	// reference: https://github.com/paulirish/infinite-scroll
+
 	$(function(){
 		update_date(null);
+
+		// 持续加载实现
+		// reference: https://github.com/paulirish/infinite-scroll
 		$('#events').infinitescroll({
-	    navSelector  : "nav.pagination",   // selector for the paged navigation (it will be hidden)
-	    nextSelector : "nav.pagination a[rel=next]", // selector for the NEXT link (to page 2)
-	    itemSelector : "#events div.event", // selector for all items you'll retrieve
-	  },function(newElements, data, url){
-	  	update_date(newElements);
-	  });
+			navSelector  : "nav.pagination",   // selector for the paged navigation (it will be hidden)
+			nextSelector : "nav.pagination a[rel=next]", // selector for the NEXT link (to page 2)
+			itemSelector : "#events div.event", // selector for all items you'll retrieve
+		},function(newElements, data, url){
+			update_date(newElements);
+		});
 	});
