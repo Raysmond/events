@@ -3,7 +3,7 @@
 	.form-inputs
 		= f.input :title, placeholder: "任务内容", required: true
 		= f.input :assign_user do
-			= f.collection_select :assign_user_id, @project.users, :id, :name, {prompt: '请选择', :include_blank=>true}, {class: "form-control"}
+			= f.collection_select :assign_user_id, @project.users, :id, :name, { :include_blank=>true}, {class: "form-control"}
 		/ - if !@project or !@todo.project_id.present?
 		/ 	= f.input :project do
 		/ 		= f.collection_select :project_id, Project.all, :id, :name, {}, {class: "form-control"}

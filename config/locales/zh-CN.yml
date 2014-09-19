@@ -44,6 +44,7 @@ zh-CN:
       comment: 评论
       event: 事件
       todo_event: 任务事件
+      document_event: 文档事件
     attributes:
       user:
         email: 邮箱
