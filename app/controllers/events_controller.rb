@@ -5,7 +5,7 @@ class EventsController < ApplicationController
 	# 显示当前登录用户的当前团队内的动态
 	# 显示登录用户有权限查看到的项目的动态，没有权限的不显示
 	def index
-		@events = Event.where(team_id: current_user.current_team_id).order(created_at: :desc).page(params[:page]).per(5)
+		@events = Event.where(team_id: current_user.current_team_id).order(created_at: :desc).page(params[:page]).per(50)
 		
 		accessable_projects = Access.where(user_id: current_user.id).joins(:project).where("projects.team_id = ?", current_user.current_team_id)
 		accessable_projects_ids = []
