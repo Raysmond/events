@@ -28,6 +28,7 @@ zh-CN:
         title: "给 %{user_name} 指派了任务"
       update_assigned_user:
         title: "把 %{old_user_name} 的任务指派给 %{new_user_name}"
+        cancel_title: "取消了 %{old_user_name} 的任务"
       update_deadline:
         title: "将任务完成时间从 %{old_deadline} 修改为 %{new_deadline}"
         no_deadline: 没有截止日期

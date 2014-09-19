@@ -1,43 +1,48 @@
 - a = event.action  # 事件类型
 - p = event.params  # 参数
 
-.row.event-item.event
-	.col-sm-1
-		= event.created_at.strftime("%_m/%d %H:%M")
 
-	.col-sm-2
-		strong = link_to event.user.name, user_path(event.user)
-	
-	.col-sm-7
-		- if a == 'todo_create'
-			= t 'event.todo.create.title'
-		- elsif a == 'todo_update'
-			= t 'event.todo.update.title', old_todo_title: p[:old_todo_title]
-		- elsif a == 'todo_delete'
-			= t 'event.todo.delete.title'
-		- elsif a == 'todo_complete'
-			= t 'event.todo.complete.title'
-		- elsif a == 'todo_assign_to_user'
-			= t 'event.todo.assign_to_user.title', user_name: p[:user_name]
-		- elsif a == 'todo_update_assigned_user'
-			= t 'event.todo.update_assigned_user.title', old_user_name: p[:old_user_name], new_user_name: p[:new_user_name]
-		- elsif a == 'todo_update_deadline'
-			- old_deadline = p[:old_deadline].present? ? p[:old_deadline].in_time_zone("Beijing").strftime("%_m月%d日") : t("event.todo.update_deadline.no_deadline") 
-			= t 'event.todo.update_deadline.title', old_deadline: old_deadline, new_deadline: p[:new_deadline].in_time_zone("Beijing").strftime("%_m月%d日")
-		- elsif a == 'todo_add_comment'
-			= t 'event.todo.add_comment.title'
+.col-sm-12
+	.event-date = event.created_at.strftime("%_m/%d")
+.col-sm-1
+	= event.created_at.strftime("%H:%M")
 
-		/ 任务链接
-		span ： 
-		= link_to p[:todo_title], todo_path(event.eventable_id)
+.col-sm-2
+	strong = link_to event.user.name, user_path(event.user)
 
-		/ 任务事件内容
-		- if a == 'todo_add_comment'
-			= simple_format link_to strip_tags(p[:comment_content]), todo_path(Comment.find(p[:comment_id]).try(:todo))
-	
-	/ 对应的项目
-	.col-sm-2
-		strong 
-			= link_to p[:project_name], project_path(event.ownerable_id), target: "_blank"
-	.col-sm-12
-		hr
+.col-sm-7
+	- if a == 'todo_create'
+		= t 'event.todo.create.title'
+	- elsif a == 'todo_update'
+		= t 'event.todo.update.title', old_todo_title: p[:old_todo_title]
+	- elsif a == 'todo_delete'
+		= t 'event.todo.delete.title'
+	- elsif a == 'todo_complete'
+		= t 'event.todo.complete.title'
+	- elsif a == 'todo_assign_to_user'
+		= t 'event.todo.assign_to_user.title', user_name: p[:user_name]
+	- elsif a == 'todo_update_assigned_user'
+		/ 指派给新的人做
+		= t 'event.todo.update_assigned_user.title', old_user_name: p[:old_user_name], new_user_name: p[:new_user_name] if p[:new_user_name].present?
+		/ 取消了某人的任务
+		= t 'event.todo.update_assigned_user.cancel_title', old_user_name: p[:old_user_name] unless p[:new_user_name].present?
+	- elsif a == 'todo_update_deadline'
+		- old_deadline = p[:old_deadline].present? ? p[:old_deadline].in_time_zone("Beijing").strftime("%_m月%d日") : t("event.todo.update_deadline.no_deadline") 
+		= t 'event.todo.update_deadline.title', old_deadline: old_deadline, new_deadline: p[:new_deadline].in_time_zone("Beijing").strftime("%_m月%d日")
+	- elsif a == 'todo_add_comment'
+		= t 'event.todo.add_comment.title'
+
+	/ 任务链接
+	span ： 
+	= link_to p[:todo_title], todo_path(event.eventable_id)
+
+	/ 任务事件内容
+	- if a == 'todo_add_comment'
+		= simple_format link_to strip_tags(p[:comment_content]), todo_path(Comment.find(p[:comment_id]).try(:todo))
+
+/ 对应的项目
+.col-sm-2
+	strong 
+		= link_to p[:project_name], project_path(event.ownerable_id), target: "_blank"
+.col-sm-12
+	hr

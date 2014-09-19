@@ -1,5 +1,6 @@
 - if event.eventable_type == 'Todo'
-	= render partial: "todo_event", locals: { event: event }
+	.row.event-item.event 
+		= render partial: "todo_event", locals: { event: event }
 - else
 	/ 其他资源产生的动态事件
 	.row.event

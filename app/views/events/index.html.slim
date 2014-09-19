@@ -6,13 +6,51 @@ div#events
 		= render @events
 
 = paginate @events
+div#last_event style="display:none;"
+	= @events.last.id
 
 javascript:
+	function update_date(newElements){
+		var last_date;
+  	var today = new Date();
+  	var yesterday = new Date();
+  	yesterday.setDate(yesterday.getDate() - 1);
+  	today = " " + (today.getMonth() + 1) + "/" + today.getDate();
+  	yesterday = " " + (yesterday.getMonth() + 1) + "/" + yesterday.getDate();
+  	if(window.last_date != undefined){
+			last_date = window.last_date;
+		} else{
+			last_date = $('#events .event .event-date').last().text();
+			window.last_date = last_date;
+		}
+		if(newElements == null){
+			//newElements = 
+			newElements = (document.getElementsByClassName("event"));
+			last_date = "";
+		}
+		for(var i=0;i<newElements.length;i++){
+			var e = $(newElements[i]);
+			var cur_date = e.find('.event-date').first();
+			if(cur_date.text() == last_date){
+				cur_date.css("display", "none");
+			} else{
+				window.last_date = last_date = cur_date.text();
+				if(cur_date.text() == today){
+					cur_date.text("今");
+				} else if(cur_date.text() == yesterday){
+					cur_date.text("昨");
+				}
+			}
+		}
+	}
 	// reference: https://github.com/paulirish/infinite-scroll
 	$(function(){
+		update_date(null);
 		$('#events').infinitescroll({
 	    navSelector  : "nav.pagination",   // selector for the paged navigation (it will be hidden)
 	    nextSelector : "nav.pagination a[rel=next]", // selector for the NEXT link (to page 2)
-	    itemSelector : "#events div.event" // selector for all items you'll retrieve
+	    itemSelector : "#events div.event", // selector for all items you'll retrieve
+	  },function(newElements, data, url){
+	  	update_date(newElements);
 	  });
 	});
