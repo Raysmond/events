@@ -36,6 +36,10 @@ gem 'rails_admin'
 gem 'enumerize'
 gem 'kaminari'
 
+gem 'unicorn'
+gem "rainbows"
+gem "sidekiq"
+
 group :development, :test do
   gem "better_errors"
   gem 'pry'
@@ -49,6 +53,13 @@ group :development, :test do
   # gem 'rspec-cells', '~> 0.2.1'
   gem 'factory_girl_rails', '1.4.0'
   # gem 'rack-mini-profiler'
+end
+
+group :development do
+  gem 'capistrano',           '3.2.1'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-rails'
+  gem 'capistrano-sidekiq'
 end
 
 # Use unicorn as the app server
