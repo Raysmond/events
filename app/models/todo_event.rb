@@ -1,4 +1,6 @@
 class TodoEvent < Event
+  default_scope -> { where(eventable_type: 'Todo') }
+
   def todo
     self.eventable
   end
